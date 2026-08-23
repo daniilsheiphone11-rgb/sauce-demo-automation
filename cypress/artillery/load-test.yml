@@ -1,0 +1,33 @@
+config:
+  target: "https://httpbin.org"
+
+  phases:
+    - duration: 10
+      arrivalRate: 2
+
+scenarios:
+  - name: "API Load Test"
+    flow:
+
+      # GET
+      - get:
+          url: "/get"
+          qs:
+            userId: 1
+          expect:
+            - statusCode: 200
+
+      # GET headers
+      - get:
+          url: "/headers"
+          expect:
+            - statusCode: 200
+
+      # POST
+      - post:
+          url: "/post"
+          json:
+            username: "Test"
+            password: "Test"
+          expect:
+            - statusCode: 200
